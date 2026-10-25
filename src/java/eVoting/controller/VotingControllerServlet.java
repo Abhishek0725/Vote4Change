@@ -25,45 +25,7 @@ import javax.servlet.http.HttpSession;
 
 public class VotingControllerServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher rd=null;
-       HttpSession sess=request.getSession();
-       String userid=(String)sess.getAttribute("userid");
-       if(userid==null){
-           sess.invalidate();
-           response.sendRedirect("accessdenied.html");
-           return;
-       }
-       try {
-    	   String cid=VoteDao.getCandidateId(userid);
-    	   if(cid==null) {
-    		   ArrayList<CandidateInfo> candidateList=CandidateDao.viewCandidate(userid);
-    		   request.setAttribute("candidateList", candidateList);
-    		   rd=request.getRequestDispatcher("showcandidate.jsp");
-    	   }else {
-    		   CandidateInfo cd = VoteDao.getVote(cid);
-    		   request.setAttribute("candidate", cd);
-    		   rd=request.getRequestDispatcher("votedenied.jsp");
-    	   }
-       }catch(Exception ex) {
-    	   ex.printStackTrace();
-    	   request.setAttribute("Exception", ex);
-    	   rd=request.getRequestDispatcher("showexception.jsp");
-       }finally {
-    	   if(rd!=null) {
-    		   rd.forward(request, response);
-    	   }
-       }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
