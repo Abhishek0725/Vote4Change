@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author abhishek kumar
+ * @author abhi kumar
  */
 fgfhffjg
 public class VotingControllerServlet extends HttpServlet {
